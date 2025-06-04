@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feliz Cumpleaños</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f3e8ff, #e6d6f5);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      padding: 25px 60px;
+      font-size: 2rem;
+      background-color: #bb86fc;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: 0.4s ease;
+      font-family: 'Poppins', sans-serif;
+      user-select: none;
+    }
+
+    button:hover {
+      background-color: #a46de0;
+      transform: scale(1.1);
+    }
+
+    /* Mantengo los estilos previos para el resto */
+    h1 {
+      font-size: 2.8rem;
+      color: #7e57c2;
+      margin-top: 40px;
+      display: none;
+      animation: aparecer 1s ease-in-out forwards;
+      text-shadow: 2px 2px #ffffffaa;
+    }
+
+    @keyframes aparecer {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .mensaje {
+      margin: 40px auto;
+      width: 80%;
+      max-width: 700px;
+      font-size: 1.1rem;
+      color: #5d3a8a;
+      display: none;
+      animation: aparecer 1s ease-in-out forwards;
+      text-shadow: 1px 1px #fff;
+    }
+
+    /* confeti y corazones mantengo igual */
+    .confeti {
+      position: absolute;
+      width: 10px;
+      height: 20px;
+      opacity: 0.9;
+      background-color: red;
+      animation: confetiCaer linear infinite;
+      transform: rotate(45deg);
+      border-radius: 3px;
+      top: -20px;
+    }
+
+    @keyframes confetiCaer {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .corazon {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #e91e63;
+      transform: rotate(45deg);
+      animation: flotar 6s linear infinite;
+    }
+
+    .corazon::before,
+    .corazon::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #e91e63;
+      border-radius: 50%;
+    }
+
+    .corazon::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .corazon::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes flotar {
+      0% {
+        bottom: 0;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        bottom: 100vh;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="audio" src="Kevin Kaarl - San Lucas (Video oficial).mp3" preload="auto"></audio>
+
+  <button id="boton" onclick="mostrarMensaje()">Entraaaaaaaaaa</button>
+
+  <h1 id="titulo">Feliz cumpleaños a mi niña 💐</h1>
+  <p class="mensaje" id="texto">
+    Hoy es un día que debería estar marcado con alegría y espero que así haya pasado.  
+    Me duele el hecho de no haber estado contigo hoy. Perdóname, solo espero que por favor nunca dudes que cada instante pienso en ti y estoy para ti.  
+    En este nuevo año de vida te deseo todo lo hermoso que el mundo pueda ofrecerte.  
+    Yo estaré aquí, a una llamada, un mensaje o un suspiro de distancia. Siempre para ti.  
+    Te amo con todo mi corazón,
+    Y aunque tal vez ya no de la manera en que siempre creímos que sería, nunca jamás dejaría de hacerlo.
+  </p>
+
+  <script>
+    function mostrarMensaje() {
+      document.getElementById("titulo").style.display = "block";
+      document.getElementById("texto").style.display = "block";
+      document.getElementById("boton").style.display = "none";
+      document.getElementById("audio").play();
+      lanzarCorazones();
+    }
+
+    function lanzarConfeti() {
+      const colores = ['#e57373', '#f06292', '#ba68c8', '#9575cd', '#7986cb', '#64b5f6', '#4dd0e1', '#81c784', '#dce775', '#ffd54f'];
+
+      for (let i = 0; i < 100; i++) {
+        const confeti = document.createElement('div');
+        confeti.classList.add('confeti');
+        confeti.style.left = Math.random() * 100 + 'vw';
+        confeti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+        confeti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        confeti.style.animationDelay = (Math.random() * 5) + 's';
+        document.body.appendChild(confeti);
+
+        setTimeout(() => confeti.remove(), 8000);
+      }
+
+      setTimeout(lanzarConfeti, 6000);
+    }
+
+    function lanzarCorazones() {
+      for (let i = 0; i < 40; i++) {
+        const corazon = document.createElement('div');
+        corazon.classList.add('corazon');
+        corazon.style.left = Math.random() * 100 + 'vw';
+        corazon.style.bottom = '-20px';
+        corazon.style.animationDelay = (Math.random() * 3) + 's';
+        document.body.appendChild(corazon);
+
+        setTimeout(() => corazon.remove(), 8000);
+      }
+
+      setTimeout(lanzarCorazones, 9000);
+    }
+
+    // Confeti desde el inicio
+    lanzarConfeti();
+  </script>
+
+</body>
+</html>
